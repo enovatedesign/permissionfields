@@ -19,7 +19,7 @@ class PermissionFields_PositionSelectFieldType extends PositionSelectFieldType
 
 	public function getInputHtml($name, $value)
 	{
-		if (craft()->userSession->checkPermission('editField:'.$this->model->id))
+		if (craft()->userSession->checkPermission('permissionFields_editField:'.$this->model->id))
 		{
 			return parent::getInputHtml($name, $value);
 		}

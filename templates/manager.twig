@@ -1,0 +1,44 @@
+{% extends "_layouts/cp" %}
+{% set title = 'Permission Fields Manager' %}
+
+{% set crumbs = [
+	{ label: "Settings"|t, url: url('settings') },
+	{ label: "Plugins"|t,  url: url('settings/plugins') },
+] %}
+
+{% set content %}
+	{% if fields|length %}
+		<table id="fields" class="data fullwidth collapsible">
+			<thead>
+				<th scope="col">{{ 'Field'|t }}</th>
+				<th scope="col">{{ 'Group'|t }}</th>
+				<th scope="col">{{ 'Type'|t }}</th>
+				<td class="thin"></td>
+			</thead>
+			<tbody>
+				{% for field in fields %}
+				    {% set isEnabled  = (field.type in supportedFieldTypes|keys) %}
+				    <tr>
+ 				    	<th data-title="{{ "Field"|t }}">{{ field.name }}</th>
+ 				    	<td data-title="{{ "Group"|t }}">{{ field.group }}</td>
+ 				    	<td data-title="{{ "Type"|t }}">{{ craft.fields.getFieldType(field.type).name }}</td>
+ 				    	<td data-title="{{ "Status"|t }}" class="thin rightalign nowrap">
+							<form method="post" accept-charset="UTF-8">
+								<input type="hidden" name="fieldId" value="{{ field.id }}">
+								<input type="hidden" name="fieldType" value="{{ field.type }}">
+
+								{% if isEnabled %}
+									<span class="status on"></span> {{ "Enabled"|t }} 
+										<input type="button" value="{{ 'Disable'|t }}" class="btn small formsubmit" data-action="permissionFields/fieldManager/disableField">
+								{% else %}
+									<span class="status off"></span> {{ "Disabled"|t }} 
+										<input type="button" value="{{ 'Enable'|t }}" class="btn small formsubmit" data-action="permissionFields/fieldManager/enableField">
+								{% endif %}
+							</form>
+						</td>
+				    </tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+{% endset %}
