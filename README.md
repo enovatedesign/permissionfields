@@ -4,7 +4,7 @@ Granular permissions for individual fields in Craft CMS.
 
 ## Field Types
 
-This plugin allows you to create fields that are protected by Craft's user permissions system, so
+This plugin allows you to create fields that are protected* by Craft's user permissions system, so
 only users with permission can view or update the contents of those fields.
 
 Most of Craft's built-in field types are supported:
@@ -28,6 +28,8 @@ Most of Craft's built-in field types are supported:
 * Users
 
 Sorry, no Matrix fields.
+
+* Fields are "protected" in that no input HTML is rendered in the control panel for those fields, but the fields are not protected in *any* sense other than Craft's control panel UI.
 
 ## Permission Field Manager
 
